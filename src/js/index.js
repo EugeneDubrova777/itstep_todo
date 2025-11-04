@@ -21,6 +21,7 @@
 
 import $ from 'jquery';
 import { v4 as uuidv4 } from 'uuid';
+import '../scss/index.scss';
 import Task from './task';
 
 let tasks = JSON.parse(window.localStorage.getItem('tasks'));
