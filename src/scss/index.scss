@@ -4,22 +4,26 @@
 @import 'variables';
 @import 'button';
 
+html,body {
+  height: 100%;
+}
 
 body {
   background-color: $body-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .todo-list {
   max-width: 700px;
   width: 100%;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: $background-color;
   border: 2px solid $border-color;
-  margin-top: 20px;
   transition: all 0.5s ease-in-out;
 }
 
@@ -40,7 +44,24 @@ h2 {
   @include font-discharge();
 }
 
+
 li {
   color: $text-color;
   @include font-smooth();
+}
+
+.tasks {
+  width: 500px;
+}
+
+.tasks li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.done {
+  text-decoration: line-through;
+  text-decoration-color: red;
+  text-decoration-thickness: 5px;
 }

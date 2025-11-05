@@ -32,14 +32,48 @@ if(!tasks) {
 
 console.log(tasks);
 
-function addTaskToList(task) {
+function renderList() {
   const list = $('.tasks');
-  list.append(`<li class="${task.status}">${task.name}</li>`); 
+  list.html(null);
+  tasks.forEach((el, i) => {
+    addTaskToList(el, i);
+  });
 }
 
-tasks.forEach(el => {
-  addTaskToList(el);
-});
+function addTaskToList(task, i) {
+  const list = $('.tasks');
+  const li = $(`<li class="${task.status}">${i + 1}. ${task.name}</li>`);
+  const doneButton = $('<button>Do!</button>');
+  doneButton.click(() => {
+    tasks.forEach((item, index, tasks) => {
+      if(item.id == task.id) {
+        tasks[index].status = 'done';
+      }
+    });
+    renderList();
+    window.localStorage.setItem('tasks', JSON.stringify(tasks));
+  });
+  const removeButton = $('<button>Remove</button>');
+  removeButton.click(() => {
+    if(confirm('???')) {
+      tasks.forEach((item, index, tasks) => {
+        if(item.id == task.id) {
+          tasks.splice(index, 1);
+        }
+      });
+      renderList();
+      window.localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  });
+
+
+
+
+  li.append(removeButton);
+  li.append(doneButton);
+  list.append(li);
+}
+
 
 $('#add-task').click(function() {
   let text = $('#task').val();
@@ -52,10 +86,12 @@ $('#add-task').click(function() {
 
   const task = new Task(uuidv4(), text, 'in-progress');
 
-  addTaskToList(task);
   tasks.push(task); 
+  addTaskToList(task);
   window.localStorage.setItem('tasks', JSON.stringify(tasks));
 });
+
+renderList();
 
 
 
