@@ -21,6 +21,7 @@
 
 import $ from 'jquery';
 import { v4 as uuidv4 } from 'uuid';
+import '../scss/index.scss';
 import Task from './task';
 
 let tasks = JSON.parse(window.localStorage.getItem('tasks'));
@@ -33,31 +34,28 @@ console.log(tasks);
 
 function addTaskToList(task) {
   const list = $('.tasks');
-  list.append(`<li class="${task.status}">${task.name}</li>`);
-  tasks.push(task);
-  window.localStorage.setItem('tasks', JSON.stringify(tasks));
+  list.append(`<li class="${task.status}">${task.name}</li>`); 
 }
 
-$(document).ready(function() {
-  tasks.forEach(el => {
-    addTaskToList(el);
-  });
-
-  $('#add-task').click(function() {
-    let text = $('#task').val();
-    $('#task').val(null);
-
-    if (!text) {
-      alert('enter fckn text');
-      return;
-    }
-
-    const task = new Task(uuidv4(), text, 'in-progress');
-
-    addTaskToList(task);
-  });
+tasks.forEach(el => {
+  addTaskToList(el);
 });
 
+$('#add-task').click(function() {
+  let text = $('#task').val();
+  $('#task').val(null);
+
+  if (!text) {
+    alert('enter fckn text');
+    return;
+  }
+
+  const task = new Task(uuidv4(), text, 'in-progress');
+
+  addTaskToList(task);
+  tasks.push(task); 
+  window.localStorage.setItem('tasks', JSON.stringify(tasks));
+});
 
 
 
