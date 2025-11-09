@@ -1,12 +1,52 @@
 button {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#add-task {
   width: 100px;
   height: 30px;
   background-color: crimson;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 10px 0 20px 0;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
 }
+
+#add-task:hover {
+  background-color: #980b28;
+}
+
+.btns {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  width: 30px;
+  height: 30px;
+  color: beige;
+  border: none;
+  border-radius: 10px;
+}
+
+.do {
+  background-color: green;
+}
+
+.do:hover {
+  background-color: #096009;
+}
+
+.rem {
+  background-color: red;
+}
+
+.rem:hover {
+  background-color: #9f0e0e;
+}
+
